@@ -48,5 +48,28 @@ const parseMyBBTheme = (xmlFile) => {
     });
 };
 
-// Run the parser with the given XML file
-parseMyBBTheme('C:\\path\\here\\mybb_theme.xml');
+const showHelp = () => {
+    console.log(`
+Usage: node script.js <path-to-mybb_theme.xml>
+
+Options:
+  --help          Show this help message and exit
+`);
+};
+
+// Process command-line arguments
+const args = process.argv.slice(2);
+
+if (args.length > 0) {
+    if (args.includes('--help')) {
+        showHelp();
+        process.exit(0);
+    } else {
+        const xmlFile = args[0];
+        parseMyBBTheme(xmlFile);
+    }
+} else {
+    console.error("Error: No XML file provided.");
+    showHelp();
+    process.exit(1);
+}
